@@ -6,10 +6,11 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const mongoDb = require('./db_creds.js');
-const wiki = require('./wiki.js');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const wikiRouter = require('./wiki.js');
+const catalogRouter = require('./routes/catalog');
 
 main().catch( err => console.log(err));
 async function main() {
@@ -20,7 +21,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/wiki', wiki);
+app.use('/wiki', wikiRouter);
+app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
