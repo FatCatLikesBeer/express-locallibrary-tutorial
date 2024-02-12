@@ -7,10 +7,10 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const mongoDb = require('./db_creds.js');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const wikiRouter = require('./wiki.js');
-const catalogRouter = require('./routes/catalog');
+var indexRouter = require('./routes/index.js');
+var usersRouter = require('./routes/users.js');
+const wikiRouter = require('./routes/wiki.js');
+const catalogRouter = require('./routes/catalog.js');
 
 main().catch( err => console.log(err));
 async function main() {
