@@ -4,10 +4,10 @@
 <h2>List of Books</h2>
 <% if (book_list.length != 0) { book_list.forEach(function(book) { %>
 <ul>
-  <li>
-    <a href="<%= book.url %>" target="_blank"><%= book.title %></a>
-    (<%= book.author.family_name %>, <%= book.author.first_name %>)
-  </li>
+<li>
+<a href="<%= book.url %>" target="_blank"><%= book.title %></a>
+(<%= book.author.family_name %>, <%= book.author.first_name %>)
+</li>
 </ul>
 <% });} else { %>
   <p>There are no books :( </p>
