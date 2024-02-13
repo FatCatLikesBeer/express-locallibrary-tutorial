@@ -13,7 +13,7 @@
   <span class="text-warning"><%= status %></span>
   <% } %>
   <% if (status != "Available") { %>
-  <span><%= book.due_back %></span>
+  <span><%= book.due_back_formatted %></span>
   <% } %>
 </li>
 <% }); %>
