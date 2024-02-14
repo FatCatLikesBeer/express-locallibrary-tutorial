@@ -1,0 +1,22 @@
+<%- include('layout_top'); -%>
+<!- title ->
+<!- author:->
+<!- author_books: ->
+<h1><%= author.name %></h1>
+<p><%= author.lifetime %></p>
+<div style="margin-left:20px;margin-top:20px">
+<% if (author_books.length) { %>
+<h4>Books</h4>
+<% } %>
+<% if (author_books.length) { %>
+    <dl>
+    <% author_books.forEach(function(book) { %>
+        <dt><a href="<%= book.url %>"><%= book.title %></a></dt>
+        <dd><%= book.summary %></dd>
+    <% }); %>
+    </dl>
+  <% } else { %>
+      <h4><%= author.first_name %> <%= author.family_name %> has no books</h4>
+  <% } %>
+</div>
+<%- include('layout_bottom'); -%>
