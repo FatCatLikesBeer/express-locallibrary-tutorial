@@ -3,8 +3,7 @@
 <ul>
 <% bookinstance_list.forEach(function(book) { %>
 <li>
-  <a href="<% book.url %>"><%= book.book.title %> : <%= book.imprint %></a> - 
-  <% status = book.status %>
+  <a href="<%= book.url %>"><%= book.book.title %> : <%= book.imprint %></a> - <% status = book.status %>
   <% if (status == "Available") { %>
   <span class="text-success"><%= status %></span>
   <% } else if (status == "Maintenance") { %>
