@@ -3,12 +3,12 @@
 <!- book: title, author, summary, isbn, genre, url, id ->
 <!- book_instances[n]: book, imprint, due_back, status ->
 <h1><%= title %></h1>
-<b>Author: </b><a href="<%= book.url %>"><%= book.author.name %></a><br />
-<b>Summary: </b><%= book.summary %><br />
-<b>ISBN: </b><%= book.isbn %><br />
-<b>Genre: </b><% book.genre.forEach(function(genre){ %>
+<p><b>Author: </b><a href="<%= book.url %>"><%= book.author.name %></a><br /></p>
+<p><b>Summary: </b><%= book.summary %><br /></p>
+<p><b>ISBN: </b><%= book.isbn %><br /></p>
+<p><b>Genre: </b><% book.genre.forEach(function(genre){ %>
 <a href="<%= genre.url %>"><%= genre.name %></a>,
-<% }); %>
+<% }); %></p>
 <div style="margin-left:20px;margin-top:20px">
 <h4>Copies</h4>
 <% book_instances.forEach(function(val) { %>
