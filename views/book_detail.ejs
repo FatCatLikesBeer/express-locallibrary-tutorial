@@ -3,7 +3,7 @@
 <!- book: title, author, summary, isbn, genre, url, id ->
 <!- book_instances[n]: book, imprint, due_back, status ->
 <h1><%= title %></h1>
-<p><b>Author: </b><a href="<%= book.url %>"><%= book.author.name %></a><br /></p>
+<p><b>Author: </b><a href="<%= book.author.url %>"><%= book.author.name %></a><br /></p>
 <p><b>Summary: </b><%= book.summary %><br /></p>
 <p><b>ISBN: </b><%= book.isbn %><br /></p>
 <p><b>Genre: </b><% book.genre.forEach(function(genre){ %>
