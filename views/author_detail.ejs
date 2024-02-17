@@ -2,9 +2,9 @@
 <!- title ->
 <!- author:->
 <!- author_books: ->
-<h1><%= author.name %></h1>
+<h1>Author: <%= author.name %></h1>
 <p><%= author.lifetime %></p>
-<div style="margin-left:20px;margin-top:20px">
+<div style="margin-left: 20px; margin-top: 20px">
 <% if (author_books.length) { %>
 <h4>Books</h4>
 <% } %>
@@ -19,4 +19,7 @@
       <h4><%= author.first_name %> <%= author.family_name %> has no books</h4>
   <% } %>
 </div>
+<hr>
+<p><a href="<%= author.url + '/delete'%>">Delete</a></p>
+<p>Update</p>
 <%- include('layout_bottom'); -%>
