@@ -24,11 +24,13 @@
   </div>
   <div class="form-group">
     <label for="summary">Summary: </label>
-    <textarea id="summary" class="form-control" placeholder="Summary" name="summary" required></textarea>
+    <% const bodySummary = typeof book === 'undefined' ? '' : book.summary; %>
+    <textarea id="summary" class="form-control" placeholder="Summary" name="summary" required><%= bodySummary %></textarea>
   </div>
   <div class="form-group">
     <label for="isbn">ISBN: </label>
-    <input id="isbn" class="form-control" type="text" placeholder="ISBN13" name="isbn" value="<%= typeof book === 'undefined' ? '' : book.isbn %>" required />
+    <% const bodyISBN = typeof book === 'undefined' ? '' : book.isbn %>
+    <input id="isbn" class="form-control" type="text" placeholder="ISBN13" name="isbn" value="<%= bodyISBN %>" required />
   </div>
   <div class="form-group">
     <label>Genre: </label>
