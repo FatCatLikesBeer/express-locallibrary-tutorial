@@ -156,7 +156,9 @@ exports.book_create_post = [
 
 // Display Book delete form on GET.
 exports.book_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Book delete GET');
+  res.render("book_delete", {
+    title: "Delete Book:",
+  });
 });
 
 // Handle Book delete on POST.
