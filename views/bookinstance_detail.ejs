@@ -1,6 +1,6 @@
 <%- include('layout_top'); -%>
 <h1>ID: <%= bookinstance.id %></h1>
-<p><b>Title: </b><a href="<%= bookinstance.url %>"><%= bookinstance.book.title %></a></p>
+<p><b>Title: </b><a href="<%= bookinstance.book.url %>"><%= bookinstance.book.title %></a></p>
 <p><b>Imprint: </b><%= bookinstance.imprint %></p>
 <% if (bookinstance.status == "Available") { %>
 <p><b>Status: </b><span class="text-success"><%= bookinstance.status %></span></p>
