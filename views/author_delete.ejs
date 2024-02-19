@@ -8,7 +8,8 @@
     <dl>
       <% author_books.forEach(function(book) { %>
         <dt><a href="<%= book.url %>"><%= book.title %></a></dt>
-        <dd><%= book.summary %></dd>
+        <% const bookSummary = book.summary.length > 300 ? book.summary.slice(0, 300).trim() + "..." : book.summary %>
+        <dd><%= bookSummary %></dd>
       <% }); %>
     </dl>
   </div>
