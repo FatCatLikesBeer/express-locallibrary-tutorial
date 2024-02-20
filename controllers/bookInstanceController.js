@@ -1,5 +1,6 @@
 const BookInstance = require('../models/bookinstance.js');
 const Book = require('../models/book.js');
+const Author = require('../models/author.js');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 
@@ -84,7 +85,15 @@ exports.bookinstance_create_post = [
 
 // Display BookInstance delete form on GET.
 exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: BookInstance delete GEt');
+  const bookInstance = await BookInstance.findById(req.params.id).exec();
+  const book = await Book.findById(bookInstance.book).exec();
+  const author = await Author.findById(book.author).exec();
+  res.render('bookinstance_delete', {
+    title: "Delete Book Instance",
+    book: book,
+    author: author,
+    bookInstance: bookInstance,
+  });
 });
 
 // Handle BookInstance delete on POST.
