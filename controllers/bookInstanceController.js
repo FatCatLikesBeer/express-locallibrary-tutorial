@@ -85,9 +85,13 @@ exports.bookinstance_create_post = [
 
 // Display BookInstance delete form on GET.
 exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
+  // I've separated the ORM calls because they're chained.
+  // I don't believe I can get each data object in parallel from the same value.
   const bookInstance = await BookInstance.findById(req.params.id).exec();
   const book = await Book.findById(bookInstance.book).exec();
   const author = await Author.findById(book.author).exec();
+
+  // Render the page with the pulled information.
   res.render('bookinstance_delete', {
     title: "Delete Book Instance",
     book: book,
@@ -98,7 +102,11 @@ exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
 
 // Handle BookInstance delete on POST.
 exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: BookInstance delete POST');
+  // Since a book instance has no dependencies,
+  // we can immediately delete the book instance with prejudicel
+
+  await BookInstance.findByIdAndDelete(req.params.id).exec();
+  res.redirect('/catalog/bookinstances');
 });
 
 // Handle BookInstance update form on GET.
