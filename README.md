@@ -1,4 +1,4 @@
-#[The Odin Project: NodeJS Coure](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs)#
+# [The Odin Project: NodeJS Coure](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs)
 
 Decided to use *EJS* instead of *PUG* because:
 - I don't like PUG, it looks too much like Python (nothing wrong with Python, I just want to be around JS style/syntax).
