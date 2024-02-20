@@ -5,19 +5,40 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDb = require('./db_creds.js');
 
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
 const wikiRouter = require('./routes/wiki.js');
 const catalogRouter = require('./routes/catalog.js');
 
+const compression = require("compression");
+const helmet = require("helmet");
+
+// Config RateLimit
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000,    // 1 minute
+  max: 20,
+});
+
+// Connect to MongoDB
+const mongoDb = process.env.MONGODB_URI;
 main().catch( err => console.log(err));
 async function main() {
   await mongoose.connect(mongoDb);
 }
 
 var app = express();
+
+// Middleware stuff I want to run before routes.
+app.use(compression());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    "script-src" : ["self", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  }),
+);
+app.use(limiter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,4 +71,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+console.log("./app.js loaded");
 module.exports = app;
