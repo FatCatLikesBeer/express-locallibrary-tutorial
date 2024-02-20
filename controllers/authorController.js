@@ -143,11 +143,72 @@ exports.author_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display Author update form on GET.
 exports.author_update_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Author update GET');
+  // Get author and all the books by the author.
+  const author = await Author.findById(req.params.id).exec();
+
+  // Render page
+  res.render('author_create', {
+    title: "Update Author",
+    author: author,
+  });
 });
 
 // Display Author update on POST.
-exports.author_update_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Author update POST');
-});
+exports.author_update_post = [
+  // Validate & sanitize fields.
+  body("first_name")        // For the "first_name" field in `req.body`
+  .trim()                   // Trims whitespace
+  .isLength({ min: 1})      // Validates length of input
+  .escape()                 // Escapes then sends message below
+  .withMessage("First name must be specified.")
+  .isAlphanumeric()         // NOTE: Never validate names using .isAlphanumeric(). There are
+  .escape()                 // NOTE: many anmes that use other character sets.
+  .withMessage("First name has non-alphanumeric characters."),
+  body("family_name")
+  .trim()
+  .isLength({ min: 1})
+  .escape()
+  .withMessage("Family name must be specified.")
+  .isAlphanumeric()
+  .escape()
+  .withMessage("Family name has non-alphanumeric characters."),
+  body("date_of_birth", "Invalid date of birth")
+  .optional({ values: "falsy" })
+  .isISO8601()
+  .toDate(),
+  body("date_of_death", "Invalid date of death")
+  .optional({ values: "falsy" })
+  .isISO8601()
+  .toDate(),
 
+  // Process request after validation & sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create Author object with escaped and trimmed data
+    // Must include the id
+    const author = new Author({
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      date_of_birth: req.body.date_of_birth,
+      date_of_death: req.body.date_of_death,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // Errors exist. Render form again with sanitized values/errors messages.
+      res.render("author_create", {
+        title: "Create Author",
+        author: author,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data from form is valid, so save Author
+      const updatedAuthor = await Author.findByIdAndUpdate(req.params.id, author, {});
+      // redirect to updated book's detail page.
+      res.redirect(updatedAuthor.url);
+    }
+  }),
+];
