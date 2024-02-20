@@ -16,18 +16,19 @@ const BookInstanceSchema = new Schema({
 });
 
 // Virtual for bookinstance's URL
-BookInstanceSchema.virtual("url").get(function () {
+BookInstanceSchema.virtual("url").get(function() {
   // We don't use an arrow function as we'll need the 'this' object
   return `/catalog/bookinstance/${this._id}`;
 });
 
 // Virtual property for due back date but formatted nicely.
-BookInstanceSchema.virtual("due_back_formatted").get(function () {
+BookInstanceSchema.virtual("due_back_formatted").get(function() {
   // We don't use an arrow function as we'll need the 'this' object
   return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
 });
 
-BookInstanceSchema.virtual("due_back_yyyy_mm_dd").get(function () {
+// Virtual property for date formatted in YYYY-MM-DD
+BookInstanceSchema.virtual("due_back_yyyy_mm_dd").get(function() {
   return DateTime.fromJSDate(this.due_back).toISODate(); // Format
 });
 

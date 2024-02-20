@@ -4,10 +4,10 @@
 <p><b>Imprint: </b><%= bookinstance.imprint %></p>
 <% if (bookinstance.status == "Available") { %>
 <p><b>Status: </b><span class="text-success"><%= bookinstance.status %></span></p>
-<% } else if (bookinstance.status = "Maintenance") { %>
+<% } else if (bookinstance.status == "Maintenance") { %>
 <p><b>Status: </b><span class="text-danger"><%= bookinstance.status %></span></p>
 <% } else { %>
-<p><b>Status: </b><span class="text-wraning"><%= bookinstance.status %></span></p>
+<p><b>Status: </b><span class="text-warning"><%= bookinstance.status %></span></p>
 <% } %>
 <% if (bookinstance.status != "Available") { %>
 <p><b>Due back: </b><%= bookinstance.due_back_formatted %></p>
