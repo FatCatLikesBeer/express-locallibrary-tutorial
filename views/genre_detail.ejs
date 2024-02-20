@@ -6,11 +6,15 @@
 <% if (genre_books.length) { %>
 <% genre_books.forEach(function(book) { %>
 <dt><a href="<%= book.url %>"><%= book.title %></a></dt>
-<dd><%= book.summary %></dd>
+<% const bookSummary = book.summary.length > 300 ? book.summary.slice(0, 300).trim() + "..." : book.summary %>
+<dd><%= bookSummary %></dd>
 <%  }); %>
 <% } else { %>
 <p>This genre has no books</p>
 <% } %>
 </dl>
 </div>
+<hr>
+<p><a href="<%= genre.url %>/delete">Delete</a></p>
+<p><a href="<%= genre.url %>/update">Update</a></p>
 <%- include('layout_bottom'); -%>
