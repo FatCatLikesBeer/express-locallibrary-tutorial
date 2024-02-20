@@ -1,9 +1,10 @@
 <%- include('layout_top'); -%>
-<h1><%= title %></h1>
+<% const genreName = typeof genre === 'undefined' ? '' : genre?.name %>
+<h1><%= title %><%= ": " + genreName %></h1>
 <form method="POST">
   <div class="form-group">
-    <label for="name">Genre: </label>
-    <input id="name" class="form-control" type="text" placeholder="Fantasy, Poetry etc." name="name" required value="<%= typeof genre === 'undefined' ? "" : genre?.name %>" />
+    <label for="name">Genre: <%= genreName %></label>
+    <input id="name" class="form-control" type="text" placeholder="Fantasy, Poetry etc." name="name" required value="<%= genreName %>" />
   </div>
     <input class="btn btn-primary" type="submit" value="Submit">
 </form>
