@@ -1,4 +1,4 @@
-# [The Odin Project: NodeJS Coure](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs)
+# [The Odin Project: NodeJS Course](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs)
 
 View the final result at [fly.io](https://billys-library.fly.dev/).
 
